@@ -27,8 +27,9 @@ public class RecipeApiImpl implements RecipeApi {
     }
 
     @Override
-    public ResponseEntity<Recipe> getRecipes(String numberOfServings, String type, Set<String> includeIngredient,
-                                             Set<String> excludeIngredient, Integer pageLimit, Integer pageOffset) {
+    public ResponseEntity<Recipe> getRecipes(Integer numberOfServings, String type, Set<String> includedIngredient,
+                                             Set<String> excludedIngredient, String freeText, Integer pageLimit,
+                                             Integer pageOffset) {
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
 

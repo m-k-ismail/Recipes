@@ -348,6 +348,6 @@ components:
           type: integer
           format: int32
           description: A unique error code
-        title:
+        message:
           type: string
-          description: An error title that's connected to the error code
+          description: An error message that describes the error that occurred

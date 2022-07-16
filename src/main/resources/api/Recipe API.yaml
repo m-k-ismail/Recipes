@@ -156,7 +156,8 @@ paths:
         - in: path
           name: id
           schema:
-            type: string
+            type: integer
+            format: int64
           required: true
           description: "Recipe ID"
       responses:
@@ -211,7 +212,8 @@ paths:
         - in: path
           name: id
           schema:
-            type: string
+            type: integer
+            format: int64
           required: true
           description: "Recipe ID"
       responses:
@@ -261,7 +263,8 @@ paths:
         - in: path
           name: id
           schema:
-            type: string
+            type: integer
+            format: int64
           required: true
           description: "Recipe ID"
       responses:

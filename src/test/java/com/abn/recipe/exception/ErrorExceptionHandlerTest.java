@@ -19,7 +19,7 @@ public class ErrorExceptionHandlerTest {
     public void should_return_bad_request_when_error_exception_is_handled() {
         // given
         HttpStatus expectedHttpStatus = HttpStatus.BAD_REQUEST;
-        RecipeErrorType errorType = RecipeErrorType.INVALID_BODY;
+        ErrorType errorType = ErrorType.INVALID_BODY;
         ErrorException errorException = new ErrorException(errorType);
         Error error = new Error();
         error.setCode(errorType.getCode());
@@ -37,7 +37,7 @@ public class ErrorExceptionHandlerTest {
     public void should_return_internal_server_error_when_runtime_exception_is_handled() {
         // given
         HttpStatus expectedHttpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
-        RecipeErrorType errorType = RecipeErrorType.TECHNICAL_ERROR;
+        ErrorType errorType = ErrorType.TECHNICAL_ERROR;
         String exceptionMessage = "Test Runtime Exception";
         RuntimeException runtimeException = new RuntimeException(exceptionMessage);
 

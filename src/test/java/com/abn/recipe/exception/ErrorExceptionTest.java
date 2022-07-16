@@ -12,7 +12,7 @@ public class ErrorExceptionTest {
         String expectedErrorMessage = "Request body can not be null";
 
         // when
-        ErrorException errorException = new ErrorException(RecipeErrorType.INVALID_BODY);
+        ErrorException errorException = new ErrorException(ErrorType.INVALID_BODY);
 
         // then
         Assertions.assertEquals(expectedErrorCode, errorException.getCode());

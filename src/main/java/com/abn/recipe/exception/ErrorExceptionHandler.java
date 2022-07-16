@@ -21,7 +21,7 @@ public class ErrorExceptionHandler {
     @ExceptionHandler(value = {RuntimeException.class})
     public ResponseEntity<Error> handleRuntimeException(RuntimeException e){
         Error error = new Error();
-        error.setCode(RecipeErrorType.TECHNICAL_ERROR.getCode());
+        error.setCode(ErrorType.TECHNICAL_ERROR.getCode());
         error.setMessage(e.getMessage());
 
         return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);

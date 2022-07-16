@@ -11,4 +11,5 @@ public class IngredientBo {
 
     private String name;
     private Integer quantity;
+    private String recipeId;
 }

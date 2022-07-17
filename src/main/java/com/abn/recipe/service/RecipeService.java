@@ -8,4 +8,6 @@ public interface RecipeService {
     RecipeBo searchById(Long recipeId);
 
     void delete(Long recipeId);
+
+    RecipeBo update(Long recipeId, RecipeBo recipeBo);
 }

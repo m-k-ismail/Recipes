@@ -6,4 +6,6 @@ public interface RecipeService {
     RecipeBo create(RecipeBo recipeBo);
 
     RecipeBo searchById(Long recipeId);
+
+    void delete(Long recipeId);
 }

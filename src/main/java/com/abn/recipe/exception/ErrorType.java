@@ -15,7 +15,8 @@ public enum ErrorType {
     INPUT_ID_IS_NOT_NULL(11113, "Input should not have an ID"),
     AUTHENTICATION_FAILED(11114, "User is not authorized"),
     MISSING_MANDATORY_FIELD(11115),
-    RECIPE_ID_IS_INVALID(11116, "Invalid Recipe ID");
+    RECIPE_ID_IS_INVALID(11116, "Invalid Recipe ID"),
+    RECIPE_IS_NOT_FOUND(11117, "Recipe is not found");
 
     @NonNull
     private final Integer code;

@@ -48,7 +48,9 @@ public class RecipeApiImpl implements RecipeApi {
 
     @Override
     public ResponseEntity<Void> deleteRecipe(Long id) {
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+        recipeService.delete(id);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @Override

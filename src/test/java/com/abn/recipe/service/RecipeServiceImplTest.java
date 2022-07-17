@@ -8,13 +8,12 @@ import com.abn.recipe.domain.model.RecipeBo;
 import com.abn.recipe.domain.model.TypeEnumBo;
 import com.abn.recipe.repository.RecipeRepository;
 import com.abn.recipe.service.validator.RecipeCreatorValidator;
+import com.abn.recipe.service.validator.RecipeDeleteValidator;
 import com.abn.recipe.service.validator.RecipeRetrieveValidator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Spy;
+import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.text.ParseException;
@@ -43,6 +42,8 @@ public class RecipeServiceImplTest {
     private RecipeCreatorValidator recipeCreatorValidator;
     @Mock
     private RecipeRetrieveValidator recipeRetrieveValidator;
+    @Mock
+    private RecipeDeleteValidator recipeDeleteValidator;
 
     @Test
     public void should_create_recipe() throws ParseException {
@@ -71,6 +72,21 @@ public class RecipeServiceImplTest {
 
         // then
         Assertions.assertEquals(recipeEntity.getId(), outputRecipeBo.getId());
+    }
+
+    @Test
+    public void should_delete_recipe_when_id_is_given() {
+        // given
+        Long recipeId = 1L;
+
+        // when
+        recipeService.delete(recipeId);
+
+        // then
+        InOrder inOrder = Mockito.inOrder(recipeDeleteValidator, recipeRepository);
+        inOrder.verify(recipeDeleteValidator).validate(recipeId);
+        inOrder.verify(recipeRepository).deleteById(recipeId);
+        inOrder.verifyNoMoreInteractions();
     }
 
 

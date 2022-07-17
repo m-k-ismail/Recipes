@@ -8,6 +8,7 @@ import com.abn.recipe.domain.model.RecipeBo;
 import com.abn.recipe.domain.model.TypeEnumBo;
 import com.abn.recipe.repository.RecipeRepository;
 import com.abn.recipe.service.validator.RecipeCreatorValidator;
+import com.abn.recipe.service.validator.RecipeRetrieveValidator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -39,11 +41,13 @@ public class RecipeServiceImplTest {
     private RecipeRepository recipeRepository;
     @Mock
     private RecipeCreatorValidator recipeCreatorValidator;
+    @Mock
+    private RecipeRetrieveValidator recipeRetrieveValidator;
 
     @Test
     public void should_create_recipe() throws ParseException {
         // given
-        RecipeBo recipeBo = createRecipeBo();
+        RecipeBo recipeBo = createRecipeBo(null);
         RecipeEntity recipeEntity = createRecipeEntity();
         when(recipeRepository.save(any(RecipeEntity.class))).thenReturn(recipeEntity);
 
@@ -55,8 +59,22 @@ public class RecipeServiceImplTest {
         Assertions.assertNotNull(outputRecipeBo.getCreatedAt());
     }
 
+    @Test
+    public void should_retrieve_recipe_when_id_is_given() throws ParseException {
+        // given
+        Long recipeId = 1L;
+        RecipeEntity recipeEntity = createRecipeEntity();
+        when(recipeRepository.findById(recipeId)).thenReturn(Optional.of(recipeEntity));
 
-    private RecipeBo createRecipeBo() {
+        // when
+        RecipeBo outputRecipeBo = recipeService.searchById(recipeId);
+
+        // then
+        Assertions.assertEquals(recipeEntity.getId(), outputRecipeBo.getId());
+    }
+
+
+    private RecipeBo createRecipeBo(Long recipeId) {
         String title = "My Recipe";
         LocalDate createdAt = LocalDate.parse(RECIPE_CREATION_DATE);
         Integer numberOfServings = 1;
@@ -66,7 +84,7 @@ public class RecipeServiceImplTest {
         Integer ingredientQuantity = 3;
         List<IngredientBo> ingredients = List.of(new IngredientBo(ingredientName, ingredientQuantity));
 
-        return new RecipeBo(null, title, createdAt, numberOfServings, instructions, type, ingredients);
+        return new RecipeBo(recipeId, title, createdAt, numberOfServings, instructions, type, ingredients);
     }
 
     private RecipeEntity createRecipeEntity() throws ParseException {

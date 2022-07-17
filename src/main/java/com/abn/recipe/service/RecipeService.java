@@ -4,4 +4,6 @@ import com.abn.recipe.domain.model.RecipeBo;
 
 public interface RecipeService {
     RecipeBo create(RecipeBo recipeBo);
+
+    RecipeBo searchById(Long recipeId);
 }

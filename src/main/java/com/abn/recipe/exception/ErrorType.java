@@ -14,7 +14,8 @@ public enum ErrorType {
     INVALID_BODY(11112, "Request body can not be null"),
     INPUT_ID_IS_NOT_NULL(11113, "Input should not have an ID"),
     AUTHENTICATION_FAILED(11114, "User is not authorized"),
-    MISSING_MANDATORY_FIELD(11115);
+    MISSING_MANDATORY_FIELD(11115),
+    RECIPE_ID_IS_INVALID(11116, "Invalid Recipe ID");
 
     @NonNull
     private final Integer code;

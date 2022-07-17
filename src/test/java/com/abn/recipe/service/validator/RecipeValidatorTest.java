@@ -10,6 +10,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
+import static com.abn.recipe.exception.ErrorType.*;
+
 @ExtendWith(MockitoExtension.class)
 public class RecipeValidatorTest {
 
@@ -26,7 +28,7 @@ public class RecipeValidatorTest {
                 recipeValidator.validateRequestBodyIsNotNull(recipeBo));
 
         // then
-        Assertions.assertEquals("Request body can not be null", exception.getMessage());
+        Assertions.assertEquals(INVALID_BODY.getMessage(), exception.getMessage());
     }
 
     @Test
@@ -40,7 +42,7 @@ public class RecipeValidatorTest {
                 recipeValidator.validateInputIdIsNull(recipeBo));
 
         // then
-        Assertions.assertEquals("Input should not have an ID", exception.getMessage());
+        Assertions.assertEquals(INPUT_ID_IS_NOT_NULL.getMessage(), exception.getMessage());
     }
 
     @Test
@@ -54,5 +56,18 @@ public class RecipeValidatorTest {
 
         // then
         Assertions.assertEquals("Missing mandatory field, field: title", exception.getMessage());
+    }
+
+    @Test
+    public void should_throw_error_exception_when_recipe_id_is_invalid() {
+        // given
+        Long recipeId = null;
+
+        // when
+        Exception exception = Assertions.assertThrows(ErrorException.class, () ->
+                recipeValidator.validateRecipeId(recipeId));
+
+        // then
+        Assertions.assertEquals(RECIPE_ID_IS_INVALID.getMessage(), exception.getMessage());
     }
 }

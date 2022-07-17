@@ -53,7 +53,18 @@ public class RecipeApiImpl implements RecipeApi {
 
     @Override
     public ResponseEntity<RecipeRES> getRecipe(Long id) {
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+        RecipeBo recipeBo = recipeService.searchById(id);
+
+        Recipe recipe = recipeBoMapper.mapToModel(recipeBo);
+
+        RecipeRES recipeRES = new RecipeRES().data(recipe);
+
+        HttpStatus httpStatus = HttpStatus.OK;
+        if (recipeRES.getData() == null) {
+            httpStatus = HttpStatus.NOT_FOUND;
+        }
+
+        return new ResponseEntity<>(recipeRES, httpStatus);
     }
 
     @Override

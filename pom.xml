@@ -21,6 +21,7 @@
         <hibernate.validator.version>7.0.1.Final</hibernate.validator.version>
         <jackson.databind.nullable.version>0.2.0</jackson.databind.nullable.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
+        <jwt.version>0.9.1</jwt.version>
         <junit.version>5.8.1</junit.version>
         <java.version>11</java.version>
     </properties>
@@ -39,6 +40,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
 
         <!-- PostgreSQL -->
         <dependency>
@@ -56,6 +61,11 @@
             <artifactId>mapstruct</artifactId>
             <version>${mapstruct.version}</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${jwt.version}</version>
         </dependency>
 
         <!-- Swagger UI -->
@@ -146,9 +156,34 @@
                         <goals>
                             <goal>generate</goal>
                         </goals>
-                        <id>buildApi</id>
+                        <id>buildRecipeApi</id>
                         <configuration>
                             <inputSpec>${basedir}/src/main/resources/api/Recipe API.yaml</inputSpec>
+
+                            <generatorName>spring</generatorName>
+                            <library>spring-boot</library>
+
+                            <generateApis>true</generateApis>
+                            <generateModels>true</generateModels>
+                            <configOptions>
+                                <interfaceOnly>true</interfaceOnly>
+                                <useBeanValidation>true</useBeanValidation>
+                                <performBeanValidation>true</performBeanValidation>
+                                <apiPackage>com.abn.api</apiPackage>
+                                <modelPackage>com.abn.model</modelPackage>
+                                <sourceFolder>/src/main/java</sourceFolder>
+                                <implFolder>/src/main/java</implFolder>
+                                <serializableModel>true</serializableModel>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <id>buildAuthApi</id>
+                        <configuration>
+                            <inputSpec>${basedir}/src/main/resources/api/Authentication API.yaml</inputSpec>
 
                             <generatorName>spring</generatorName>
                             <library>spring-boot</library>

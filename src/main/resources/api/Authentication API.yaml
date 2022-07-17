@@ -1,0 +1,95 @@
+openapi: 3.0.3
+info:
+  title: Authentication API
+  description: Component file dedicated to all operations related to the product Authentication API
+  version: 1.0.0
+servers:
+  - url: 'https://localhost:8080/v1'
+paths:
+  /authentication:
+    post:
+      tags:
+        - Authentication
+      summary:
+        Generates a JWT token
+      operationId: authenticate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthenticationREQ'
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationRES'
+        "401":
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "403":
+          description: "Forbidden"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "400":
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "404":
+          description: "Not Found"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "500":
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    AuthenticationREQ:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/User'
+    AuthenticationRES:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/User'
+    User:
+      type: object
+      required:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+          description: Username of the individual who's requesting a JWT token.
+        password:
+          type: string
+          description: The password that is associated to the username which is being used to generate JWT token.
+        token:
+          type: string
+          description: The generated JWT token.
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: A unique error code
+        message:
+          type: string
+          description: An error message that describes the error that occurred

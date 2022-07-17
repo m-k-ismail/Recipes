@@ -64,7 +64,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Recipe'
+                $ref: '#/components/schemas/RecipesRES'
         "204":
           description: "Not Content"
         "400":
@@ -107,14 +107,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Recipe'
+              $ref: '#/components/schemas/RecipeREQ'
       responses:
         "200":
           description: "OK"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Recipe'
+                $ref: '#/components/schemas/RecipeRES'
         "400":
           description: "Bad Request"
           content:
@@ -166,7 +166,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Recipe'
+                $ref: '#/components/schemas/RecipeRES'
         "400":
           description: "Bad Request"
           content:
@@ -207,7 +207,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Recipe'
+              $ref: '#/components/schemas/RecipeREQ'
       parameters:
         - in: path
           name: id
@@ -222,7 +222,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Recipe'
+                $ref: '#/components/schemas/RecipeRES'
         "400":
           description: "Bad Request"
           content:
@@ -302,6 +302,23 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    RecipeREQ:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Recipe'
+    RecipeRES:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Recipe'
+    RecipesRES:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Recipe'
     Recipe:
       type: object
       properties:

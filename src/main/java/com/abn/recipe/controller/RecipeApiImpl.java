@@ -24,19 +24,19 @@ public class RecipeApiImpl implements RecipeApi {
     }
 
     @Override
-    public ResponseEntity<Recipe> getRecipe(Long id) {
+    public ResponseEntity<RecipeRES> getRecipe(Long id) {
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
 
     @Override
-    public ResponseEntity<Recipe> getRecipes(Integer numberOfServings, String type, Set<String> includedIngredient,
-                                             Set<String> excludedIngredient, String freeText, Integer pageLimit,
-                                             Integer pageOffset) {
+    public ResponseEntity<RecipesRES> getRecipes(Integer numberOfServings, String type, Set<String> includedIngredient,
+                                                 Set<String> excludedIngredient, String freeText, Integer pageLimit,
+                                                 Integer pageOffset) {
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
 
     @Override
-    public ResponseEntity<Recipe> updateRecipe(Long id, Recipe recipe) {
+    public ResponseEntity<RecipeRES> updateRecipe(Long id, RecipeREQ recipe) {
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
 }

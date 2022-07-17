@@ -104,6 +104,7 @@ paths:
         Creates and stores a new Recipe
       operationId: createRecipe
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -321,6 +322,12 @@ components:
             $ref: '#/components/schemas/Recipe'
     Recipe:
       type: object
+      required:
+        - title
+        - type
+        - numberOfServings
+        - instructions
+        - ingredients
       properties:
         id:
           type: integer
@@ -353,6 +360,9 @@ components:
             $ref: '#/components/schemas/ingredient'
     Ingredient:
       type: object
+      required:
+        - name
+        - quantity
       properties:
         name:
           type: string

@@ -12,4 +12,9 @@ public class ErrorException extends RuntimeException {
         this.code = errorType.getCode();
     }
 
+    public ErrorException(Integer code, String message) {
+        super(message);
+        this.code = code;
+    }
+
 }

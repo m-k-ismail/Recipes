@@ -1,0 +1,225 @@
+{
+	"info": {
+		"_postman_id": "2cb41632-6d45-4033-897f-5c7a3e1632fe",
+		"name": "Recipe",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Generate Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"data\": {\r\n        \"username\": \"abnamro\",\r\n        \"password\": \"abnamro\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/authentication",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"authentication"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Create Recipe",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYm5hbXJvIiwiZXhwIjoxNjU4MTY4NTM3LCJpYXQiOjE2NTgwODIxMzd9.ieUI6o5WdV6SMt61kfmXB6402GVm3mJC6g8HB3CE24XPhGGa6MCWBrx1c5aXE-UZXd7OXwRL9XxLG06d8WThJQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"data\": {\r\n        \"title\": \"My Recipe\",\r\n        \"numberOfServings\": 1,\r\n        \"instructions\": \"You need to cook this in the oven\",\r\n        \"type\": \"VEGETARIAN\",\r\n        \"ingredients\": [\r\n            {\r\n                \"name\": \"potato\",\r\n                \"quantity\": 2\r\n            },\r\n            {\r\n                \"name\": \"cheese\",\r\n                \"quantity\": 1\r\n            }\r\n        ]\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/recipe/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"recipe",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find Recipe By ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYm5hbXJvIiwiZXhwIjoxNjU4MTQ4Njk0LCJpYXQiOjE2NTgwNjIyOTR9.fTtERZiT4HeQRsEJaPmpLouixsgQXFjyz8UQCEKKPpBhDJCCwTssGqUP96HFwq7nd_8Budzr8gwTC65NBFrXLA",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/v1/recipe/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"recipe",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Recipe By ID",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYm5hbXJvIiwiZXhwIjoxNjU4MTQzMDYxLCJpYXQiOjE2NTgwNTY2NjF9.Ay3jQiG0pLXD2NRr-Yi8IA2eby2X1fVVepTtwIsr4Kno_9-8AFHgWXqO_SRmaa7uNWZqnBbrAFlyIp8AX-TBAQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/v1/recipe/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"recipe",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Recipe By ID",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYm5hbXJvIiwiZXhwIjoxNjU4MTUwNDI0LCJpYXQiOjE2NTgwNjQwMjR9.ONUMcTP3jn9-fDfA5MoPp1ydStVBPSllba1SWSw1nP6eLUqy5dVIwPvUIpEwwy7KVo31MEgo2OoiG5BbMN7grA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"data\": {\r\n        \"id\": 1,\r\n        \"createdAt\": \"2022-07-17\",\r\n        \"title\": \"My Recipe2\",\r\n        \"numberOfServings\": 1,\r\n        \"instructions\": \"Just do it!\",\r\n        \"type\": \"VEGETARIAN\",\r\n        \"ingredients\": [\r\n            {\r\n                \"name\": \"potato\",\r\n                \"quantity\": 2\r\n            },\r\n            {\r\n                \"name\": \"tomato\",\r\n                \"quantity\": 3\r\n            }\r\n        ]\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/recipe/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"recipe",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find Recipes By Search Params",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYm5hbXJvIiwiZXhwIjoxNjU4MjU2Mzg1LCJpYXQiOjE2NTgxNjk5ODV9.tbgoqXD07nvSvOUlU5K3XdqtSCfhQ8KlUXxehi4BOOOAqJkL6F8mla7bp43v1IwbiLC62f7j8CkKF8J55UAtyw",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/v1/recipe?type=VEGETARIAN&numberOfServings=3&includedIngredient=cheese&excludedIngredient=tomato&freeText=oven&pageLimit=20&pageOffset=0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"recipe"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "VEGETARIAN"
+						},
+						{
+							"key": "numberOfServings",
+							"value": "3"
+						},
+						{
+							"key": "includedIngredient",
+							"value": "cheese"
+						},
+						{
+							"key": "excludedIngredient",
+							"value": "tomato"
+						},
+						{
+							"key": "freeText",
+							"value": "oven"
+						},
+						{
+							"key": "pageLimit",
+							"value": "20"
+						},
+						{
+							"key": "pageOffset",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

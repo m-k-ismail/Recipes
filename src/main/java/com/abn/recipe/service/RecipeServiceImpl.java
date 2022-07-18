@@ -7,12 +7,17 @@ import com.abn.recipe.domain.model.RecipeBo;
 import com.abn.recipe.exception.ErrorException;
 import com.abn.recipe.exception.ErrorType;
 import com.abn.recipe.repository.RecipeRepository;
+import com.abn.recipe.repository.RecipeSearchParams;
+import com.abn.recipe.repository.RecipeSpecification;
 import com.abn.recipe.service.validator.RecipeCreatorValidator;
 import com.abn.recipe.service.validator.RecipeDeleteValidator;
 import com.abn.recipe.service.validator.RecipeRetrieveValidator;
 import com.abn.recipe.service.validator.RecipeUpdateValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -68,6 +73,27 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
+    public List<RecipeBo> searchBySearchParams(RecipeSearchParams recipeSearchParams) {
+        Specification<RecipeEntity> recipeEntitySpecification = Specification
+                .where(RecipeSpecification.equalType(recipeSearchParams.getType())
+                        .and(RecipeSpecification.equalNumberOfServings(recipeSearchParams.getNumberOfServings()))
+                        .and(RecipeSpecification.includeIngredients(recipeSearchParams.getIncludedIngredient()))
+                        .and(RecipeSpecification.excludeIngredients(recipeSearchParams.getExcludedIngredient()))
+                        .and(RecipeSpecification.ftsFreeText(recipeSearchParams.getFreeText())));
+
+        int maxPageLimit = 500;
+        if(recipeSearchParams.getPageLimit() > maxPageLimit){
+            recipeSearchParams.setPageLimit(maxPageLimit);
+        }
+
+        Page<RecipeEntity> recipeEntityPage = recipeRepository.findAll(recipeEntitySpecification,
+                        PageRequest.of(recipeSearchParams.getPageOffset(), recipeSearchParams.getPageLimit()));
+        List<RecipeEntity> recipeEntities = recipeEntityPage.getContent();
+
+        return recipeEntityMapper.mapToBoList(recipeEntities);
+    }
+
+    @Override
     public void delete(Long recipeId) {
         recipeDeleteValidator.validate(recipeId);
 
@@ -89,7 +115,7 @@ public class RecipeServiceImpl implements RecipeService {
         RecipeEntity recipeEntity = recipeEntityMapper.mapToEntity(recipeBo);
 
         List<IngredientEntity> ingredients = recipeEntity.getIngredients();
-        for(int index = 0; index< ingredients.size(); index++){
+        for (int index = 0; index < ingredients.size(); index++) {
             ingredients.set(index, existingRecipeEntity.getIngredients().get(index));
         }
 

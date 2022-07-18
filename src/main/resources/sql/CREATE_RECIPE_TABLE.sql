@@ -5,6 +5,7 @@ CREATE TABLE RECIPE
     created_at         DATE                                         NOT NULL,
     number_of_servings SMALLINT                                     NOT NULL,
     instructions       TEXT                                         NOT NULL,
+    instructions_tsv   TSVECTOR                                     NOT NULL,
     type               VARCHAR(40)                                  NOT NULL
 );
 

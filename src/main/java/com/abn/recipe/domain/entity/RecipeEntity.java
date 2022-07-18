@@ -3,6 +3,7 @@ package com.abn.recipe.domain.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -26,6 +27,9 @@ public class RecipeEntity {
     private Integer numberOfServings;
     @Column(name = "instructions")
     private String instructions;
+    @Type(type = "com.vladmihalcea.hibernate.type.search.PostgreSQLTSVectorType")
+    @Column(name = "instructions_tsv")
+    private String instructionsTSV;
     @Column(name = "type")
     private String type;
     @OneToMany(targetEntity = IngredientEntity.class, cascade = CascadeType.ALL)

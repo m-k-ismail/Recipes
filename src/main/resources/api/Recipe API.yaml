@@ -341,7 +341,7 @@ components:
           description: Type of the recipe.
           enum:
             - VEGETARIAN
-            - NON-VEGETARIAN
+            - NON_VEGETARIAN
         createdAt:
           type: string
           format: date

@@ -9,6 +9,7 @@ import com.abn.recipe.domain.mapper.RecipeBoMapper;
 import com.abn.recipe.domain.model.RecipeBo;
 import com.abn.recipe.exception.ErrorException;
 import com.abn.recipe.exception.ErrorType;
+import com.abn.recipe.repository.RecipeSearchParams;
 import com.abn.recipe.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -73,7 +75,14 @@ public class RecipeApiImpl implements RecipeApi {
     public ResponseEntity<RecipesRES> getRecipes(Integer numberOfServings, String type, Set<String> includedIngredient,
                                                  Set<String> excludedIngredient, String freeText, Integer pageLimit,
                                                  Integer pageOffset) {
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+        RecipeSearchParams recipeSearchParams = new RecipeSearchParams(
+                numberOfServings, type, includedIngredient, excludedIngredient, freeText, pageLimit, pageOffset);
+
+        List<RecipeBo> recipeBos = recipeService.searchBySearchParams(recipeSearchParams);
+
+        List<Recipe> recipes = recipeBoMapper.mapToModelList(recipeBos);
+
+        return new ResponseEntity<>(new RecipesRES().data(recipes), HttpStatus.OK);
     }
 
     @Override

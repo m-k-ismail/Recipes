@@ -13,8 +13,7 @@ import com.abn.recipe.service.validator.RecipeCreatorValidator;
 import com.abn.recipe.service.validator.RecipeDeleteValidator;
 import com.abn.recipe.service.validator.RecipeRetrieveValidator;
 import com.abn.recipe.service.validator.RecipeUpdateValidator;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
@@ -27,9 +26,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Log4j2
 public class RecipeServiceImpl implements RecipeService {
-
-    private static final Logger LOGGER = LogManager.getLogger(RecipeServiceImpl.class);
 
     private final RecipeRepository recipeRepository;
     private final RecipeEntityMapper recipeEntityMapper;
@@ -54,7 +52,7 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public RecipeBo create(RecipeBo recipeBo) {
-        LOGGER.info("create service has been triggered.");
+        log.info("create service has been triggered.");
 
         recipeCreatorValidator.validate(recipeBo);
 
@@ -69,7 +67,7 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public RecipeBo searchById(Long recipeId) {
-        LOGGER.info("searchById service has been triggered.");
+        log.info("searchById service has been triggered.");
 
         recipeRetrieveValidator.validate(recipeId);
 
@@ -88,7 +86,7 @@ public class RecipeServiceImpl implements RecipeService {
                         .and(RecipeSpecification.includeIngredients(recipeSearchParams.getIncludedIngredient()))
                         .and(RecipeSpecification.excludeIngredients(recipeSearchParams.getExcludedIngredient()))
                         .and(RecipeSpecification.ftsFreeText(recipeSearchParams.getFreeText())));
-        LOGGER.info("searchBySearchParams service has been triggered.");
+        log.info("searchBySearchParams service has been triggered.");
 
         int maxPageLimit = 500;
         if(recipeSearchParams.getPageLimit() > maxPageLimit){
@@ -104,7 +102,7 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public void delete(Long recipeId) {
-        LOGGER.info("delete service has been triggered.");
+        log.info("delete service has been triggered.");
 
         recipeDeleteValidator.validate(recipeId);
 
@@ -117,7 +115,7 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public RecipeBo update(Long recipeId, RecipeBo recipeBo) {
-        LOGGER.info("update service has been triggered.");
+        log.info("update service has been triggered.");
 
         recipeUpdateValidator.validate(recipeId, recipeBo);
 

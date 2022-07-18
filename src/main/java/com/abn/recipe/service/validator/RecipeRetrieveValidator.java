@@ -1,14 +1,13 @@
 package com.abn.recipe.service.validator;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+@Log4j2
 public class RecipeRetrieveValidator {
 
-    private static final Logger LOGGER = LogManager.getLogger(RecipeRetrieveValidator.class);
     private final RecipeValidator recipeValidator;
 
     @Autowired
@@ -17,7 +16,7 @@ public class RecipeRetrieveValidator {
     }
 
     public void validate(Long id){
-        LOGGER.info("Retrieve validator is triggered");
+        log.info("Retrieve validator is triggered");
         recipeValidator.validateRecipeId(id);
     }
 }

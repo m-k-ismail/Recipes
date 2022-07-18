@@ -1,4 +1,7 @@
-CREATE TABLE RECIPE
+SELECT 'CREATE DATABASE recipedb'
+WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'recipedb')\gexec
+
+CREATE TABLE IF NOT EXISTS RECIPE
 (
     id                 INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY NOT NULL,
     title              VARCHAR(150)                                 NOT NULL,
@@ -10,7 +13,7 @@ CREATE TABLE RECIPE
 );
 
 
-CREATE TABLE INGREDIENT
+CREATE TABLE IF NOT EXISTS INGREDIENT
 (
     id        INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY NOT NULL,
     name      VARCHAR(100)                                 NOT NULL,

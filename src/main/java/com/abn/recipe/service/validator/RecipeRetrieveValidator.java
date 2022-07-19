@@ -15,6 +15,11 @@ public class RecipeRetrieveValidator {
         this.recipeValidator = recipeValidator;
     }
 
+    /**
+     * Executes the necessary validations for the retrieve recipe flow
+     *
+     * @param id recipe id
+     */
     public void validate(Long id){
         log.info("Retrieve validator is triggered");
         recipeValidator.validateRecipeId(id);

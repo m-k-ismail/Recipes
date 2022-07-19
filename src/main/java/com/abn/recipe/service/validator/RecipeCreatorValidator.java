@@ -21,6 +21,11 @@ public class RecipeCreatorValidator {
         this.recipeValidator = recipeValidator;
     }
 
+    /**
+     * Executes the necessary validations for the recipe create flow
+     *
+     * @param recipeBo the incoming recipe
+     */
     public void validate(RecipeBo recipeBo) {
         log.info("Create validator is triggered");
         recipeValidator.validateRequestBodyIsNotNull(recipeBo);

@@ -21,6 +21,12 @@ public class RecipeUpdateValidator {
         this.recipeValidator = recipeValidator;
     }
 
+    /**
+     * Executes the necessary validations for the recipe update flow
+     *
+     * @param id recipe id
+     * @param recipeBo the incoming recipe
+     */
     public void validate(Long id, RecipeBo recipeBo) {
         log.info("Update validator is triggered");
         recipeValidator.validateRecipeId(id);

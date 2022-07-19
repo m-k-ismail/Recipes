@@ -2,6 +2,11 @@ package com.abn.recipe.exception;
 
 import lombok.Getter;
 
+/**
+ * Exception used to stop the process
+ *
+ * @author Mohammad Ismail
+ */
 @Getter
 public class ErrorException extends RuntimeException {
 

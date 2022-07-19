@@ -5,6 +5,11 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Enums for all the errors that are used for the application
+ *
+ * @author Mohammad Ismail
+ */
 @Getter
 @AllArgsConstructor
 @RequiredArgsConstructor

@@ -20,4 +20,16 @@ CREATE TABLE IF NOT EXISTS INGREDIENT
     quantity  SMALLINT                                     NOT NULL,
     recipe_id INT,
     CONSTRAINT fk_recipe FOREIGN KEY (recipe_id) REFERENCES RECIPE (id)
-)
+);
+
+CREATE INDEX IF NOT EXISTS idx_recipe_number_of_servings
+    ON recipe(number_of_servings);
+
+CREATE INDEX IF NOT EXISTS idx_recipe_type
+    ON recipe(type);
+
+CREATE INDEX IF NOT EXISTS idx_ingredient_name
+    ON ingredient(name);
+
+CREATE INDEX IF NOT EXISTS idx_instructions_tsv
+    ON recipe USING GIN (instructions_tsv);

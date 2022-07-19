@@ -88,7 +88,7 @@ public class RecipeServiceImpl implements RecipeService {
                         .and(RecipeSpecification.ftsFreeText(recipeSearchParams.getFreeText())));
         log.info("searchBySearchParams service has been triggered.");
 
-        // An API consumer can send a really huge poge limit that the server can not take so it is better to limit the max
+        // An API consumer can send a really huge poge limit that the server can not take, so it is better to limit the max
         int maxPageLimit = 500;
         if (recipeSearchParams.getPageLimit() > maxPageLimit) {
             recipeSearchParams.setPageLimit(maxPageLimit);

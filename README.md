@@ -72,8 +72,7 @@ Spring Security and JWT were both used to handle the authentication of all Recip
 
 You can use http://localhost:8080/v1/authenticate to generate a web token and then update all of  
 your API headers to use the newly generated token. Header formate is: "Bearer %generated token%"
-<br>
-<br>
+
 username : abnamro
 <br>
 password: abnamro
@@ -82,6 +81,6 @@ password: abnamro
 
 Karate is being used for the integration tests in this project. The tests cover failure and success cases. Also, all
 the cases that were mentioned in the assignments for filtering have integration tests.
-<br/>
 
-All integration tests are included under `src/test/java/integrationtests` 
+All integration tests are included under `src/test/java/integrationtests` and the results can be found under
+`target/karate-reports/karate-summary.html` after the tests are excuted.
